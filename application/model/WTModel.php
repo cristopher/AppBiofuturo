@@ -9,12 +9,32 @@ class WTModel
         $this->table = $table;
     }
 
-    public function getAll(){
+    public function getAll($where = []){
         $database = DatabaseFactory::getFactory()->getConnection();
 
         $sql = "SELECT * FROM " . $this->table;
+        $order = ' ORDER BY ';
+        $order_count = 0;
+
+        foreach ($where as $var => $value) {
+            if ($order_count > 0) {
+                $order .= " AND ";
+            }
+
+            $order .= "$var $value";
+            $order_count++;
+        }
+
+        if ($order_count > 0) {
+            $sql .= $order;
+        }
+
         $query = $database->prepare($sql);
-        $query->execute();
+        if ($order_count > 0) {
+            $query->execute($where);
+        }else{
+            $query->execute();
+        }
 
         return $query->fetchAll();
     }
