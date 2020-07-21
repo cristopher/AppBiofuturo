@@ -13,7 +13,7 @@
                         <form action="<?php echo Config::get('URL'); ?>user/editUserEmail_action" method="post">
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Nuevo E-Mail:</label>
-                                <input type="email" class="form-control" name="user_email" aria-describedby="emailHelp" placeholder="email" required>
+                                <input type="email" class="form-control" name="user_email" aria-describedby="emailHelp" placeholder="email" value="<?= $this->user_email; ?>" required>
                                 <small id="emailHelp" class="form-text text-muted">Nunca compartimos su E-Mail.</small>
                             </div>
                             <button type="submit" class="btn btn-primary">Guardar</button>

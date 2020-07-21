@@ -23,6 +23,7 @@ class UserController extends Controller
     public function editUsername()
     {
         $this->View->render('user/editUsername',array(
+            'user_name' => Session::get('user_name'),
             'title' => 'Cambiar nombre de usuario'
         ));
     }
@@ -46,6 +47,7 @@ class UserController extends Controller
     public function editUserEmail()
     {
         $this->View->render('user/editUserEmail',array(
+            'user_email' => Session::get('user_email'),
             'title' => 'Cambiar Email'
         ));
     }
