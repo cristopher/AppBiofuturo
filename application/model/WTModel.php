@@ -106,6 +106,9 @@ class WTModel
         $values = ') VALUES (';
         $sql_count = 0;
 
+        //verificar que existan datos
+        if (empty((array)$data)) return false;
+
         //cargar las variables al string sql
         foreach ($data as $var => $value) {
             if ($sql_count > 0) {
@@ -164,6 +167,9 @@ class WTModel
         $sql = 'UPDATE ' . $this->table . ' SET ';
         $sql_count = 0;
         
+        //verificar que existan datos
+        if (empty((array)$data)) return false;
+
         //primero cargar los datos que vamos a guardar
         //cargar las variables al string sql
         foreach ($data as $var => $value) {
@@ -227,6 +233,9 @@ class WTModel
 
         $sql = 'DELETE FROM '. $this->table .'  WHERE ';
         $sql_count = 0;
+
+        //verificar que existan datos
+        if (empty((array)$where)) return false;
 
         foreach ($where as $var => $value) {
             if ($sql_count > 0) {
