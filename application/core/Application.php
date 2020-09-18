@@ -15,7 +15,7 @@ class Application
         if (file_exists(Config::get('PATH_CONTROLLER') . $this->controller_name . '.php')) {
             require Config::get('PATH_CONTROLLER') . $this->controller_name . '.php';
             $this->controller = new $this->controller_name();
-            if (method_exists($this->controller, $this->action_name)) {
+            if (is_callable(array($this->controller, $this->action_name))) {
                 if (!empty($this->parameters)) {
                     call_user_func_array(array($this->controller, $this->action_name), $this->parameters);
                 } else {
