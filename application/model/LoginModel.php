@@ -217,7 +217,7 @@ class LoginModel
 
             $sql = "UPDATE users SET user_remember_me_token = :user_remember_me_token WHERE user_id = :user_id LIMIT 1";
             $query = $database->prepare($sql);
-            $query->execute(array(':user_remember_me_token' => NULL, ':user_id' => $user_id));
+            $query->execute(array(':user_remember_me_token' => null, ':user_id' => $user_id));
         }
 
         setcookie('remember_me', false, time() - (3600 * 24 * 3650), Config::get('COOKIE_PATH'),
