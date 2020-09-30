@@ -1,4 +1,4 @@
-<header class="multicolor text-white">
+<header class="py-4 wetrust">
     <div class="container">
         <h1>Modificar nota</h1>
     </div>
@@ -17,7 +17,7 @@
                         <label>Cambiar texto de nota:</label>
                         <input type="text" class="form-control" name="note_text" value="<?php echo htmlentities($this->note->note_text); ?>">
                     </div>
-                    <button type="submit" class="btn btn-primary shadow-lg">Modificar</button>
+                    <button type="submit" class="btn btn-outline-danger shadow-lg">Modificar</button>
                 </form>
                 <?php } else { ?>
                 <div class="alert alert-danger" role="alert">Esta nota no existe.</div>

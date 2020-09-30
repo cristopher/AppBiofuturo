@@ -1,10 +1,10 @@
 <section>
-    <header class="multicolor text-white">
+    <header class="py-4 wetrust">
         <div class="container">
             <h1>Cambiar nombre de usuario</h1>
         </div>
     </header>
-    <main class="multicolor minimo">
+    <main class="py-4 minimo">
         <div class="container">
             <?php $this->renderFeedbackMessages(); ?>
             <div class="d-flex justify-content-center">
@@ -17,7 +17,7 @@
                             </div>
                             <!-- set CSRF token at the end of the form -->
                             <input type="hidden" name="csrf_token" value="<?= Csrf::makeToken(); ?>" />
-                            <button type="submit" class="btn btn-primary shadow-lg">Guardar</button>
+                            <button type="submit" class="btn btn-outline-danger my-4 shadow-lg mx-auto d-block">Guardar</button>
                         </form>
                     </div>
                 </div>

@@ -1,5 +1,5 @@
 <section>
-    <header class="multicolor text-white">
+    <header class="py-4 wetrust">
         <div class="container">
             <h1>Perfiles</h1>
         </div>

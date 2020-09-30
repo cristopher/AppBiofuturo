@@ -1,4 +1,4 @@
-<header class="multicolor text-white">
+<header class="py-4 wetrust">
     <div class="container">
         <h1>Notas personales</h1>
     </div>
@@ -14,7 +14,7 @@
                         <label>Texto de nueva nota:</label>
                         <input type="text" class="form-control" name="note_text" autocomplete="off">
                     </div>
-                    <button type="submit" class="btn btn-primary shadow-lg">Crear</button>
+                    <button type="submit" class="btn btn-outline-danger shadow-lg">Crear</button>
                 </form>
             </div>
         </div>

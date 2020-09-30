@@ -1,10 +1,10 @@
 <section>
-    <header class="multicolor text-white">
+    <header class="py-4 wetrust">
         <div class="container">
             <h1>Cambiar E-Mail</h1>
         </div>
     </header>
-    <main class="multicolor minimo">
+    <main class="py-4 minimo">
         <div class="container">
             <?php $this->renderFeedbackMessages(); ?>
             <div class="d-flex justify-content-center">
@@ -16,7 +16,7 @@
                                 <input type="email" class="form-control" name="user_email" aria-describedby="emailHelp" placeholder="email" value="<?= $this->user_email; ?>" required>
                                 <small id="emailHelp" class="form-text text-muted">Nunca compartimos su E-Mail.</small>
                             </div>
-                            <button type="submit" class="btn btn-primary">Guardar</button>
+                            <button type="submit" class="btn btn-outline-danger my-4 shadow-lg mx-auto d-block">Guardar</button>
                         </form>
                     </div>
                 </div>
