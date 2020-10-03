@@ -82,26 +82,6 @@ class UserController extends Controller
         Redirect::to('user/editAvatar');
     }
 
-    public function changeUserRole()
-    {
-        $this->View->render('user/changeUserRole',array(
-            'title' => 'Cambiar rol'
-        ));
-    }
-
-    public function changeUserRole_action()
-    {
-        if (Request::post('user_account_upgrade')) {
-            UserRoleModel::changeUserRole(2);
-        }
-
-        if (Request::post('user_account_downgrade')) {
-            UserRoleModel::changeUserRole(1);
-        }
-
-        Redirect::to('user/changeUserRole');
-    }
-
     public function changePassword()
     {
         $this->View->render('user/changePassword',array(

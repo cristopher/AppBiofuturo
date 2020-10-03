@@ -72,7 +72,6 @@
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarUser">
                                 <a class="dropdown-item" href="user">Mi cuenta</a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="user/changeUserRole">Cambiar tipo de cuenta</a>
                                 <a class="dropdown-item" href="user/editAvatar">Modificar avatar</a>
                                 <a class="dropdown-item" href="user/editusername">Cambiar mi nombre de usuario</a>
                                 <a class="dropdown-item" href="user/edituseremail">Cambiar mi correo</a>
