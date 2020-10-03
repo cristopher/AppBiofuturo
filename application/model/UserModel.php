@@ -29,32 +29,6 @@ class UserModel
         return $all_users_profiles;
     }
 
-    public static function getPublicProfileOfUser($user_id)
-    {
-        $database = DatabaseFactory::getFactory()->getConnection();
-
-        $sql = "SELECT user_id, user_name, user_email, user_active, user_has_avatar, user_deleted
-                FROM users WHERE user_id = :user_id LIMIT 1";
-        $query = $database->prepare($sql);
-        $query->execute(array(':user_id' => $user_id));
-
-        $user = $query->fetch();
-
-        if ($query->rowCount() == 1) {
-            if (Config::get('USE_GRAVATAR')) {
-                $user->user_avatar_link = AvatarModel::getGravatarLinkByEmail($user->user_email);
-            } else {
-                $user->user_avatar_link = AvatarModel::getPublicAvatarFilePathOfUser($user->user_has_avatar, $user->user_id);
-            }
-        } else {
-            Session::add('feedback_negative', Text::get('FEEDBACK_USER_DOES_NOT_EXIST'));
-        }
-
-        array_walk_recursive($user, 'Filter::XSSFilter');
-
-        return $user;
-    }
-
     public static function getUserDataByUserEmail($user_email)
     {
         $database = DatabaseFactory::getFactory()->getConnection();

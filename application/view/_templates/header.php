@@ -52,9 +52,6 @@
                     <li class="nav-item <?php if (View::checkForActiveController($filename, "index")) { echo 'active'; } ?>">
                         <a class="nav-link" href="/">Inicio <span class="sr-only">(current)</span></a>
                     </li>
-                    <li class="nav-item <?php if (View::checkForActiveController($filename, "profile")) { echo 'active'; } ?>">
-                        <a class="nav-link" href="profile">Perfiles</a>
-                    </li>
                     <?php if (Session::userIsLoggedIn()) { ?>
                         <li class="nav-item <?php if (View::checkForActiveController($filename, "dashboard")) { echo 'active'; } ?>">
                             <a class="nav-link" href="dashboard">Tablero</a>
