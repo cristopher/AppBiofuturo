@@ -62,6 +62,61 @@ class RegistrationModel
         return false;
     }
 
+    public static function registerNewUserAdmin()
+    {
+        $user_name = strip_tags(Request::post('user_name'));
+        $user_email = strip_tags(Request::post('user_email'));
+        $user_email_repeat = strip_tags(Request::post('user_email'));
+        $user_password_new = Request::post('user_password_new');
+        $user_password_repeat = Request::post('user_password_repeat');
+
+        $validation_result = self::registrationInputAdminValidation($user_name, $user_password_new, $user_password_repeat, $user_email, $user_email_repeat);
+        if (!$validation_result) {
+            return false;
+        }
+
+        $user_password_hash = password_hash($user_password_new, PASSWORD_DEFAULT);
+
+        $return = true;
+
+        if (UserModel::doesEmailAlreadyExist($user_email)) {
+            Session::add('feedback_negative', Text::get('FEEDBACK_USER_EMAIL_ALREADY_TAKEN'));
+            $return = false;
+        }
+
+        if (!$return) return false;
+
+        $user_activation_hash = sha1(uniqid(mt_rand(), true));
+        if (!self::writeNewUserToDatabase($user_name, $user_password_hash, $user_email, time(), $user_activation_hash)) {
+            Session::add('feedback_negative', Text::get('FEEDBACK_ACCOUNT_CREATION_FAILED'));
+            return false;
+        }
+        $user_id = UserModel::getUserIdByUserEmail($user_email);
+
+        if (!$user_id) {
+            Session::add('feedback_negative', Text::get('FEEDBACK_UNKNOWN_ERROR'));
+            return false;
+        }
+        if (self::sendVerificationEmail($user_id, $user_name, $user_email, $user_activation_hash)) {
+            Session::add('feedback_positive', Text::get('FEEDBACK_ACCOUNT_SUCCESSFULLY_CREATED'));
+            return true;
+        }
+        self::rollbackRegistrationByUserId($user_id);
+        Session::add('feedback_negative', Text::get('FEEDBACK_VERIFICATION_MAIL_SENDING_FAILED'));
+        return false;
+    }
+
+    public static function registrationInputAdminValidation($user_name, $user_password_new, $user_password_repeat, $user_email, $user_email_repeat)
+    {
+        $return = true;
+        
+        if (self::validateUserName($user_name) AND self::validateUserEmail($user_email, $user_email_repeat) AND self::validateUserPassword($user_password_new, $user_password_repeat) AND $return) {
+            return true;
+        }
+
+        return false;
+    }
+
     public static function validateUserName($user_name)
     {
         if (empty($user_name)) {

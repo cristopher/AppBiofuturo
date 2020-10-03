@@ -16,6 +16,13 @@ class AdminController extends Controller
         );
     }
 
+    public function register_action()
+    {
+        $registration_successful = RegistrationModel::registerNewUserAdmin();
+
+        Redirect::to('admin');
+    }
+
     public function actionAccountSettings()
     {
         AdminModel::setAccountSuspensionAndDeletionStatus(
