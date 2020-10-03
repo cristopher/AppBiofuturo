@@ -26,7 +26,7 @@ class PasswordResetModel
             return false;
         }
 
-        $mail_sent = self::sendPasswordResetMail($result->user_id, $user_password_reset_hash, $result->user_email);
+        $mail_sent = self::sendPasswordResetMail($result->user_id, $result->user_name, $user_password_reset_hash, $result->user_email);
         if ($mail_sent) {
             return true;
         }
@@ -54,15 +54,13 @@ class PasswordResetModel
         return false;
     }
 
-    public static function sendPasswordResetMail($user_id, $user_password_reset_hash, $user_email)
+    public static function sendPasswordResetMail($user_id, $user_name, $user_password_reset_hash, $user_email)
     {
-        $body = Config::get('EMAIL_PASSWORD_RESET_CONTENT') . ' ' . Config::get('URL') .
+        $body = Text::get('FEEDBACK_REGISTRATION_HELLO') . $user_name. "\n\n". Config::get('EMAIL_PASSWORD_RESET_CONTENT') . "\n\n".  Config::get('URL') .
                 Config::get('EMAIL_PASSWORD_RESET_URL') . '/' . urlencode($user_id) . '/' . urlencode($user_password_reset_hash);
 
         $mail = new Mail;
-        $mail_sent = $mail->sendMail($user_email, Config::get('EMAIL_PASSWORD_RESET_FROM_EMAIL'),
-            Config::get('EMAIL_PASSWORD_RESET_FROM_NAME'), Config::get('EMAIL_PASSWORD_RESET_SUBJECT'), $body
-        );
+        $mail_sent = $mail->sendMail($user_email, Config::get('EMAIL_PASSWORD_RESET_SUBJECT'), $body);
 
         if ($mail_sent) {
             Session::add('feedback_positive', Text::get('FEEDBACK_PASSWORD_RESET_MAIL_SENDING_SUCCESSFUL'));

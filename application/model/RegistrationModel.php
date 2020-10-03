@@ -152,9 +152,7 @@ class RegistrationModel
                 . '/' . urlencode($user_id) . '/' . urlencode($user_activation_hash);
 
         $mail = new Mail;
-        $mail_sent = $mail->sendMail($user_email, Config::get('EMAIL_VERIFICATION_FROM_EMAIL'),
-            Config::get('EMAIL_VERIFICATION_FROM_NAME'), Config::get('EMAIL_VERIFICATION_SUBJECT'), $body
-        );
+        $mail_sent = $mail->sendMail($user_email, Config::get('EMAIL_VERIFICATION_SUBJECT'), $body);
 
         if ($mail_sent) {
             Session::add('feedback_positive', Text::get('FEEDBACK_VERIFICATION_MAIL_SENDING_SUCCESSFUL'));

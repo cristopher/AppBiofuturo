@@ -6,7 +6,7 @@ class Mail
 {
     private $error;
 
-    public function sendMailWithPHPMailer($user_email, $from_email, $from_name, $subject, $body)
+    public function sendMailWithPHPMailer($user_email, $from_email, $from_name, $subject, $body, $html)
     {
         $mail = new PHPMailer;
         
@@ -35,6 +35,10 @@ class Mail
         $mail->Subject = $subject;
         $mail->Body = $body;
 
+        if ($html){
+            $mail->IsHTML(true);
+        }
+
         $wasSendingSuccessful = $mail->Send();
 
         if ($wasSendingSuccessful) {
@@ -46,12 +50,12 @@ class Mail
         }
     }
 
-    public function sendMail($user_email, $from_email, $from_name, $subject, $body)
+    public function sendMail($user_email, $subject, $body, $html = false)
     {
         if (Config::get('EMAIL_USED_MAILER') == "phpmailer") {
 
             return $this->sendMailWithPHPMailer(
-                $user_email, $from_email, $from_name, $subject, $body
+                $user_email, Config::get('EMAIL_FROM'), Config::get('EMAIL_FROM_NAME'), $subject, $body, $html
             );
         }
 
