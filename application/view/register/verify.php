@@ -4,8 +4,8 @@
     </div>
 </header>
 <main class="minimo">
-    <div class="container">
+    <div class="container pt-2">
         <?php $this->renderFeedbackMessages(); ?>
-        <a href="<?php echo Config::get('URL'); ?>">Volver al inicio</a>
+        <a class="btn btn-outline-danger" href="<?php echo Config::get('URL'); ?>">Volver al inicio</a>
     </div>
 </main>
