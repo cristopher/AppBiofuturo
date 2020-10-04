@@ -18,6 +18,7 @@ services:
     image: web:latest
     volumes:
       - .:/opt/app
+      - ./php/php.ini:/usr/local/etc/php/conf.d/php.ini
     links:
       - db
   db:
