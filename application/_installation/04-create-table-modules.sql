@@ -1,4 +1,4 @@
-CREATE TABLE IF NOT EXISTS `modules` (
+CREATE TABLE IF NOT EXISTS `huge`.`modules` (
  `module_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
  `module_name` text NOT NULL,
  `module_menu` text NOT NULL,

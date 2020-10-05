@@ -1,4 +1,4 @@
-<main class="py-4 minimo">
+<main class="py-4 completo">
     <div class="container">
         <?php $this->renderFeedbackMessages(); ?>
         <div class="d-flex p-2 justify-content-center">
