@@ -6,11 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <base href="<?php echo Config::get('URL'); ?>" target="_self">
     <link rel="stylesheet" href="css/nunito.css">
-    <link rel="stylesheet" href="css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/bootstrap.min.css" integrity="sha384-WtHCcd/cf7tgVgrBTucEDmIODJvuLRMmErKYMf+4ufedHtePtRc1h2IPoz+O0ulr" crossorigin="anonymous">
     <link rel="stylesheet" href="css/css.css">
     <script src="js/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="js/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+    <script src="js/popper.min.js" integrity="sha384-yxolr0nejIh7GnnJJm13oIZeW2Q5Ff2CTTK+m3JSRl99Ju9d2nDM7KIPltH9yazb" crossorigin="anonymous"></script>
+    <script src="js/bootstrap.min.js" integrity="sha384-g02mOn8VgCJQQd4OETlDfJh2lWAbN++A6o0vd7uTMM05/mfCm2+D494FMz/HHQvv%" crossorigin="anonymous"></script>
     <link rel="apple-touch-icon" sizes="57x57" href="images/apple-icon-57x57.png">
     <link rel="apple-touch-icon" sizes="60x60" href="images/apple-icon-60x60.png">
     <link rel="apple-touch-icon" sizes="72x72" href="images/apple-icon-72x72.png">
