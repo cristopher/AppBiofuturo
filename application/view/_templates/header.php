@@ -59,6 +59,16 @@
                         <li class="nav-item <?php if (View::checkForActiveController($filename, "note")) { echo 'active'; } ?>">
                             <a class="nav-link" href="note">Mis Notas</a>
                         </li>
+                        <?php if ($this->modulos) { ?>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Módulos</a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <?php foreach($this->modulos as $key => $value) { ?>
+                                    <a class="dropdown-item" href="<?= $value->module_url; ?>"><?= $value->module_menu; ?></a>
+                                    <?php } ?>
+                                </div>
+                            </li>
+                        <?php } ?>
                     <?php } else { ?>
                         <li class="nav-item <?php if (View::checkForActiveController($filename, "register/index")) { echo 'active'; } ?>">
                             <a class="nav-link" href="register">Registrar</a>

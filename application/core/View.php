@@ -5,11 +5,14 @@ class View
 
     public function render($filename, $data = null)
     {
+
         if ($data) {
             foreach ($data as $key => $value) {
                 $this->{$key} = $value;
             }
         }
+
+        $this->{'modulos'} = ModuleModel::getModuleMenu();
 
         require Config::get('PATH_VIEW') . '_templates/header.php';
         require Config::get('PATH_VIEW') . $filename . '.php';
