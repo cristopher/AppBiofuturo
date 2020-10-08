@@ -44,6 +44,17 @@ class AvatarModel
         }
     }
 
+    public static function createAvatarAdmin($user_id)
+    {
+        if (self::isAvatarFolderWritable() AND self::validateImageFile()) {
+
+            $target_file_path = Config::get('PATH_AVATARS') . $user_id;
+            self::resizeAvatarImage($_FILES['avatar_file']['tmp_name'], $target_file_path, Config::get('AVATAR_SIZE'), Config::get('AVATAR_SIZE'));
+            self::writeAvatarToDatabase($user_id);
+            Session::add('feedback_positive', Text::get('FEEDBACK_AVATAR_UPLOAD_SUCCESSFUL'));
+        }
+    }
+
     public static function isAvatarFolderWritable()
     {
         if (is_dir(Config::get('PATH_AVATARS')) AND is_writable(Config::get('PATH_AVATARS'))) {
@@ -146,6 +157,30 @@ class AvatarModel
 
         if ($query->rowCount() == 1) {
             Session::set('user_avatar_file', self::getPublicUserAvatarFilePathByUserId($userId));
+            Session::add("feedback_positive", Text::get("FEEDBACK_AVATAR_IMAGE_DELETE_SUCCESSFUL"));
+            return true;
+        } else {
+            Session::add("feedback_negative", Text::get("FEEDBACK_AVATAR_IMAGE_DELETE_FAILED"));
+            return false;
+        }
+    }
+
+    public static function deleteAvatarAdmin($userId)
+    {
+        if (!ctype_digit($userId)) {
+            Session::add("feedback_negative", Text::get("FEEDBACK_AVATAR_IMAGE_DELETE_FAILED"));
+            return false;
+        }
+
+        self::deleteAvatarImageFile($userId);
+
+        $database = DatabaseFactory::getFactory()->getConnection();
+
+        $query = $database->prepare("UPDATE users SET user_has_avatar = 0 WHERE user_id = :user_id LIMIT 1");
+        $query->bindValue(":user_id", (int)$userId, PDO::PARAM_INT);
+        $query->execute();
+
+        if ($query->rowCount() == 1) {
             Session::add("feedback_positive", Text::get("FEEDBACK_AVATAR_IMAGE_DELETE_SUCCESSFUL"));
             return true;
         } else {

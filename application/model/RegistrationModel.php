@@ -235,4 +235,22 @@ class RegistrationModel
         Session::add('feedback_negative', Text::get('FEEDBACK_ACCOUNT_ACTIVATION_FAILED'));
         return false;
     }
+
+    public static function verifyUserAdmin($user_id)
+    {
+        $database = DatabaseFactory::getFactory()->getConnection();
+
+        $sql = "UPDATE users SET user_active = 1, user_activation_hash = NULL
+                WHERE user_id = :user_id LIMIT 1";
+        $query = $database->prepare($sql);
+        $query->execute(array(':user_id' => $user_id));
+
+        if ($query->rowCount() == 1) {
+            Session::add('feedback_positive', Text::get('FEEDBACK_ACCOUNT_ACTIVATION_SUCCESSFUL'));
+            return true;
+        }
+
+        Session::add('feedback_negative', Text::get('FEEDBACK_ACCOUNT_ACTIVATION_FAILED'));
+        return false;
+    }
 }

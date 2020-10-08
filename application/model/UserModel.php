@@ -29,6 +29,32 @@ class UserModel
         return $all_users_profiles;
     }
 
+    public static function getPublicProfileOfUser($user_id)
+    {
+        $database = DatabaseFactory::getFactory()->getConnection();
+
+        $sql = "SELECT user_id, user_name, user_email, user_active, user_has_avatar, user_deleted, user_account_type, user_suspension_timestamp
+                FROM users WHERE user_id = :user_id LIMIT 1";
+        $query = $database->prepare($sql);
+        $query->execute(array(':user_id' => $user_id));
+
+        $user = $query->fetch();
+
+        if ($query->rowCount() == 1) {
+            if (Config::get('USE_GRAVATAR')) {
+                $user->user_avatar_link = AvatarModel::getGravatarLinkByEmail($user->user_email);
+            } else {
+                $user->user_avatar_link = AvatarModel::getPublicAvatarFilePathOfUser($user->user_has_avatar, $user->user_id);
+            }
+        } else {
+            Session::add('feedback_negative', Text::get('FEEDBACK_USER_DOES_NOT_EXIST'));
+        }
+
+        array_walk_recursive($user, 'Filter::XSSFilter');
+
+        return $user;
+    }
+
     public static function getUserDataByUserEmail($user_email)
     {
         $database = DatabaseFactory::getFactory()->getConnection();
@@ -104,6 +130,35 @@ class UserModel
         }
     }
 
+    public static function editUserNameAdmin()
+    {
+        $user_name = Request::post('user_name'); 
+        $user_id = Request::post('user_id');
+
+        $user = self::getPublicProfileOfUser($user_id);
+
+        if ($user_name == $user->user_name) {
+            Session::add('feedback_negative', Text::get('FEEDBACK_USERNAME_SAME_AS_OLD_ONE'));
+            return false;
+        }
+
+        if (!preg_match("/^[a-zA-Z á-úÁ-ÚüÜ]{2,64}$/", $user_name)) {
+            Session::add('feedback_negative', Text::get('FEEDBACK_USERNAME_DOES_NOT_FIT_PATTERN'));
+            return false;
+        }
+
+        $user_name = substr(strip_tags($user_name), 0, 64);
+
+        $status_of_action = self::saveNewUserName($user_id, $user_name);
+        if ($status_of_action) {
+            Session::add('feedback_positive', Text::get('FEEDBACK_USERNAME_CHANGE_SUCCESSFUL'));
+            return true;
+        } else {
+            Session::add('feedback_negative', Text::get('FEEDBACK_UNKNOWN_ERROR'));
+            return false;
+        }
+    }
+
     public static function editUserEmail($new_user_email)
     {
         if (empty($new_user_email)) {
@@ -137,6 +192,50 @@ class UserModel
             RegistrationModel::sendVerificationEmail(Session::get('user_id'), Session::get('user_name'), $new_user_email, $user_activation_hash);
             //disabled user and save activation hash for verify email
             self::disabledUser(Session::get('user_id'), $user_activation_hash );
+            Session::add('feedback_positive', Text::get('FEEDBACK_EMAIL_CHANGE_SUCCESSFUL'));
+            return true;
+        }
+
+        Session::add('feedback_negative', Text::get('FEEDBACK_UNKNOWN_ERROR'));
+        return false;
+    }
+
+    public static function editUserEmailAdmin()
+    {
+        $user_email = Request::post('user_email'); 
+        $user_id = Request::post('user_id');
+
+        $user = self::getPublicProfileOfUser($user_id);
+
+        if (empty($user_email)) {
+            Session::add('feedback_negative', Text::get('FEEDBACK_EMAIL_FIELD_EMPTY'));
+            return false;
+        }
+
+        if ($user_email == $user->user_email) {
+            Session::add('feedback_negative', Text::get('FEEDBACK_EMAIL_SAME_AS_OLD_ONE'));
+            return false;
+        }
+
+        if (!filter_var($user_email, FILTER_VALIDATE_EMAIL)) {
+            Session::add('feedback_negative', Text::get('FEEDBACK_EMAIL_DOES_NOT_FIT_PATTERN'));
+            return false;
+        }
+
+        $user_email = substr(strip_tags($user_email), 0, 254);
+
+        if (self::doesEmailAlreadyExist($user_email)) {
+            Session::add('feedback_negative', Text::get('FEEDBACK_USER_EMAIL_ALREADY_TAKEN'));
+            return false;
+        }
+
+        if (self::saveNewEmailAddress($user_id, $user_email)) {
+            //generate activation hash
+            $user_activation_hash = sha1(uniqid(mt_rand(), true));
+            //send verify email
+            RegistrationModel::sendVerificationEmail($user_id, $user->user_name, $user_email, $user_activation_hash);
+            //disabled user and save activation hash for verify email
+            self::disabledUser($user_id, $user_activation_hash );
             Session::add('feedback_positive', Text::get('FEEDBACK_EMAIL_CHANGE_SUCCESSFUL'));
             return true;
         }

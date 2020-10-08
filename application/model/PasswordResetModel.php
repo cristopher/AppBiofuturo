@@ -229,4 +229,52 @@ class PasswordResetModel
 
         return true;
     }
+
+    public static function changePasswordAdmin($user_id, $user_password_new, $user_password_repeat)
+    {
+        if (!self::validatePasswordChangeAdmin($user_id, $user_password_new, $user_password_repeat)) {
+            return false;
+        }
+
+        $user_password_hash = password_hash($user_password_new, PASSWORD_DEFAULT);
+
+        if (self::saveChangedPassword($user_id, $user_password_hash)) {
+            Session::add('feedback_positive', Text::get('FEEDBACK_PASSWORD_CHANGE_SUCCESSFUL'));
+            return true;
+        } else {
+            Session::add('feedback_negative', Text::get('FEEDBACK_PASSWORD_CHANGE_FAILED'));
+            return false;
+        }
+    }
+
+    public static function validatePasswordChangeAdmin($user_id, $user_password_new, $user_password_repeat)
+    {
+        $database = DatabaseFactory::getFactory()->getConnection();
+
+        $sql = "SELECT user_password_hash, user_failed_logins FROM users WHERE user_id = :user_id LIMIT 1;";
+        $query = $database->prepare($sql);
+        $query->execute(array(':user_id' => $user_id));
+
+        $user = $query->fetch();
+
+        if ($query->rowCount() == 1) {
+            $user_password_hash = $user->user_password_hash;
+        } else {
+            Session::add('feedback_negative', Text::get('FEEDBACK_USER_DOES_NOT_EXIST'));
+            return false;
+        }
+
+        if (empty($user_password_new) || empty($user_password_repeat)) {
+            Session::add('feedback_negative', Text::get('FEEDBACK_PASSWORD_FIELD_EMPTY'));
+            return false;
+        } else if ($user_password_new !== $user_password_repeat) {
+            Session::add('feedback_negative', Text::get('FEEDBACK_PASSWORD_REPEAT_WRONG'));
+            return false;
+        } else if (strlen($user_password_new) < 6) {
+            Session::add('feedback_negative', Text::get('FEEDBACK_PASSWORD_TOO_SHORT'));
+            return false;
+        }
+
+        return true;
+    }
 }

@@ -13,6 +13,17 @@ class NoteModel
         return $query->fetchAll();
     }
 
+    public static function getAllNotesAdmin($user_id)
+    {
+        $database = DatabaseFactory::getFactory()->getConnection();
+
+        $sql = "SELECT user_id, note_id, note_text FROM notes WHERE user_id = :user_id";
+        $query = $database->prepare($sql);
+        $query->execute(array(':user_id' => $user_id));
+
+        return $query->fetchAll();
+    }
+
     public static function getNote($note_id)
     {
         $database = DatabaseFactory::getFactory()->getConnection();
@@ -76,6 +87,26 @@ class NoteModel
         $sql = "DELETE FROM notes WHERE note_id = :note_id AND user_id = :user_id LIMIT 1";
         $query = $database->prepare($sql);
         $query->execute(array(':note_id' => $note_id, ':user_id' => Session::get('user_id')));
+
+        if ($query->rowCount() == 1) {
+            return true;
+        }
+
+        Session::add('feedback_negative', Text::get('FEEDBACK_NOTE_DELETION_FAILED'));
+        return false;
+    }
+
+    public static function deleteNoteAdmin($note_id, $user_id)
+    {
+        if (!$note_id) {
+            return false;
+        }
+
+        $database = DatabaseFactory::getFactory()->getConnection();
+
+        $sql = "DELETE FROM notes WHERE note_id = :note_id AND user_id = :user_id LIMIT 1";
+        $query = $database->prepare($sql);
+        $query->execute(array(':note_id' => $note_id, ':user_id' => $user_id));
 
         if ($query->rowCount() == 1) {
             return true;
