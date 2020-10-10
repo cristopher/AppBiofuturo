@@ -46,8 +46,8 @@ return array(
     'EMAIL_FROM_NAME' => 'Simple',
     'EMAIL_PASSWORD_RESET_URL' => 'login/verifypasswordreset',
     'EMAIL_PASSWORD_RESET_SUBJECT' => 'Cambiar contraseña',
-    'EMAIL_PASSWORD_RESET_CONTENT' => 'Haga click en el siguiente link para cambiar su contraseña:',
+    'EMAIL_PASSWORD_RESET_CONTENT' => 'Haga click en el siguiente link para cambiar su contraseña: ',
     'EMAIL_VERIFICATION_URL' => 'register/verify',
     'EMAIL_VERIFICATION_SUBJECT' => 'Verificación de cuenta',
-    'EMAIL_VERIFICATION_CONTENT' => 'Haga click en el siguiente link para activar su cuenta:',
+    'EMAIL_VERIFICATION_CONTENT' => 'Haga click en el siguiente link para activar su cuenta: ',
 );
