@@ -18,7 +18,8 @@ services:
     image: web:latest
     volumes:
       - .:/opt/app
-      - ./php/php.ini:/usr/local/etc/php/conf.d/php.ini
+      #solo si php necesita más memoria o subir archivos más grandes
+      #- ./php/php.ini:/usr/local/etc/php/conf.d/php.ini
     links:
       - db
   db:
