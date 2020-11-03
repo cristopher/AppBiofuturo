@@ -3,7 +3,7 @@ error_reporting(E_ALL);
 ini_set("display_errors", 1);
 
 return array(
-    'URL' => 'http://' . $_SERVER['HTTP_HOST'] . str_replace('public', '', dirname($_SERVER['SCRIPT_NAME'])),
+    'URL' => '//' . $_SERVER['HTTP_HOST'] . str_replace('public', '', dirname($_SERVER['SCRIPT_NAME'])),
     'PATH_CONTROLLER' => realpath(dirname(__FILE__).'/../../') . '/application/controller/',
     'PATH_VIEW' => realpath(dirname(__FILE__).'/../../') . '/application/view/',
     'PATH_AVATARS' => realpath(dirname(__FILE__).'/../../') . '/public/avatars/',
