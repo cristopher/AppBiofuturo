@@ -73,7 +73,7 @@
             <?php if (Session::userIsLoggedIn()) { ?>
                 <ul class="navbar-nav">
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle mb-3 mb-md-0 text-center" href="#" id="navbarUser" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="<?= Session::get('user_avatar_file'); ?>" width="30" height="30" alt="<?= Session::get('user_name'); ?> avatar" loading="lazy"> <?= Session::get('user_name'); ?></a>
+                        <a class="nav-link dropdown-toggle mb-3 mb-md-0 text-center" href="#" id="navbarUser" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img class="rounded-circle" src="<?= Session::get('user_avatar_file'); ?>" width="30" height="30" alt="<?= Session::get('user_name'); ?> avatar" loading="lazy"> <?= Session::get('user_name'); ?></a>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarUser">
                             <a class="dropdown-item" href="user">
                                 <div class="d-flex justify-content-between align-items-center">
