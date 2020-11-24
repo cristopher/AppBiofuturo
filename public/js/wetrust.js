@@ -13,7 +13,7 @@ export class make{
         let button_string = "";
         
         if (typeof button !== typeof undefined){
-            button_string = '<button type="button" class="btn btn-primary" id="'+_button+'" data-modal="'+id+'">'+button+'</button>';
+            button_string = '<button type="button" class="btn wetrust" id="'+_button+'" data-modal="'+id+'">'+button+'</button>';
         }
         
         let resultado ={
@@ -21,7 +21,7 @@ export class make{
             titulo:titulo,
             contenido:contenido,
             button:_button,
-            modal:'<div class="modal fade" tabindex="-1" role="dialog" id="'+id+'"><div class="modal-dialog modal-lg modal-dialog-scrollable" role="document"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="'+titulo+'">Modal title</h5></div><div class="modal-body" id="'+contenido+'"></div><div class="modal-footer"><button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>'+ button_string+'</div></div></div></div>'
+            modal:'<div class="modal fade" tabindex="-1" role="dialog" id="'+id+'"><div class="modal-dialog modal-lg modal-dialog-scrollable" role="document"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="'+titulo+'">Modal title</h5></div><div class="modal-body" id="'+contenido+'"></div><div class="modal-footer"><button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Cancelar</button>'+ button_string+'</div></div></div></div>'
         }
             
         return resultado;
@@ -60,6 +60,26 @@ export class make{
         the(modal.id).childNodes[0].classList.remove("modal-lg");
         
         $('#'+modal.id).modal("show").on('hidden.bs.modal', function (e) { $(this).remove(); });
+    }
+    
+    static deleteModal(whats, id, callback){
+        let modal = make.modal()
+
+        document.getElementsByTagName("body")[0].insertAdjacentHTML( 'beforeend', modal.modal)
+        
+        the(modal.id).childNodes[0].classList.remove("modal-lg")
+        the(modal.id).childNodes[0].classList.add("modal-sm")
+        the(modal.titulo).innerHTML = "Eliminar"
+        the(modal.titulo).classList.add("mx-auto")
+        the(modal.titulo).parentElement.classList.add("bg-danger", "text-white")
+        
+        the(modal.contenido).innerHTML = '<svg width="3em" height="3em" viewBox="0 0 16 16" class="bi bi-trash mb-3" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"></path><path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"></path></svg><p>Está seguro que desea<br>eliminar '+whats+'</p>'
+        the(modal.contenido).classList.add("text-center")
+        the(modal.contenido).parentElement.children[2].classList.add("border-top-0")
+ 
+        the(modal.button).dataset.delete = id
+        $("#"+modal.button).on("click", callback)
+        $('#'+modal.id).modal("show").on('hidden.bs.modal', function (e) { $(this).remove(); })
     }
 }
 
