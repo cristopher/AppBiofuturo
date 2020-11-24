@@ -63,7 +63,7 @@ export class make{
     }
     
     static deleteModal(whats, id, callback){
-        let modal = make.modal()
+        let modal = make.modal("Eliminar")
 
         document.getElementsByTagName("body")[0].insertAdjacentHTML( 'beforeend', modal.modal)
         
