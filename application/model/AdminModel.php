@@ -48,20 +48,9 @@ class AdminModel
         //expulsar al usuario
         self::resetUserSession($userId);
 
-        //eliminar sus notas
-        self::deleteNotes($userId);
         //eliminar al usuario
         self::byeUser($userId);
 
-    }
-
-    public static function deleteNotes($userId)
-    {
-        $notes = NoteModel::getAllNotesAdmin($userId);
-
-        foreach ($notes as $note) {
-            NoteModel::deleteNoteAdmin($note->note_id, $userId);
-        }
     }
 
     public static function byeUser($user_id)

@@ -11,8 +11,16 @@ class AdminController extends Controller
     public function index()
     {
         $this->View->render('admin/index', array(
-            'users' => UserModel::getPublicProfilesOfAllUsers(),
+            'administrator' => ModuleModel::getModuleAdmin(),
             'title' => 'Administracion')
+        );
+    }
+
+    public function usuarios()
+    {
+        $this->View->render('admin/usuarios', array(
+            'users' => UserModel::getPublicProfilesOfAllUsers(),
+            'title' => 'Usuarios')
         );
     }
 
@@ -24,7 +32,7 @@ class AdminController extends Controller
                 'title' => 'Ver perfil')
             );
         } else {
-            Redirect::to('admin');
+            Redirect::to('admin/usuarios');
         }
     }
 
@@ -39,7 +47,7 @@ class AdminController extends Controller
                 'title' => 'Cambiar rol')
             );
         } else {
-            Redirect::to('admin');
+            Redirect::to('admin/usuarios');
         }
     }
 
@@ -47,7 +55,7 @@ class AdminController extends Controller
     {
         UserRoleModel::changeUserRole();
 
-        Redirect::to('admin');
+        Redirect::to('admin/usuarios');
     }
 
     public function editAvatar($user_id)
@@ -59,7 +67,7 @@ class AdminController extends Controller
                 'title' => 'Cambiar Avatar')
             );
         } else {
-            Redirect::to('admin');
+            Redirect::to('admin/usuarios');
         }
     }
 
@@ -71,7 +79,7 @@ class AdminController extends Controller
             AvatarModel::createAvatarAdmin($user_id);
             Redirect::to('admin/editAvatar/'.$user_id);
         } else {
-            Redirect::to('admin');
+            Redirect::to('admin/usuarios');
         }
 
     }
@@ -89,7 +97,7 @@ class AdminController extends Controller
     {
         $registration_successful = RegistrationModel::registerNewUserAdmin();
 
-        Redirect::to('admin');
+        Redirect::to('admin/usuarios');
     }
 
     public function editUsername($user_id)
@@ -100,20 +108,20 @@ class AdminController extends Controller
                 'title' => 'Cambiar nombre de usuario'
             ));
         } else {
-            Redirect::to('admin');
+            Redirect::to('admin/usuarios');
         }
     }
 
     public function editUsername_action()
     {
         if (!Csrf::isTokenValid()) {
-            Redirect::to('admin');
+            Redirect::to('admin/usuarios');
             exit();
         }
 
         $result = UserModel::editUserNameAdmin();
 
-        Redirect::to('admin');
+        Redirect::to('admin/usuarios');
 
     }
 
@@ -125,7 +133,7 @@ class AdminController extends Controller
                 'title' => 'Cambiar Email'
             ));
         } else {
-            Redirect::to('admin');
+            Redirect::to('admin/usuarios');
         }
 
     }
@@ -134,7 +142,7 @@ class AdminController extends Controller
     {
         $result = UserModel::editUserEmailAdmin();
 
-        Redirect::to('admin');
+        Redirect::to('admin/usuarios');
     }
 
     public function changePassword($user_id)
@@ -145,7 +153,7 @@ class AdminController extends Controller
                 'title' => 'Cambiar contraseña'
             ));
         } else {
-            Redirect::to('admin');
+            Redirect::to('admin/usuarios');
         }
     }
 
@@ -155,7 +163,7 @@ class AdminController extends Controller
             Request::post('user_id'), Request::post('user_password_new'), Request::post('user_password_repeat')
         );
 
-        Redirect::to('admin');
+        Redirect::to('admin/usuarios');
     }
 
     public function activate($user_id){
@@ -165,7 +173,7 @@ class AdminController extends Controller
             }
         }
 
-        Redirect::to('admin');
+        Redirect::to('admin/usuarios');
     }
 
     public function softDelete($user_id, $deletionStatus){
@@ -175,7 +183,7 @@ class AdminController extends Controller
             }
         }
 
-        Redirect::to('admin');
+        Redirect::to('admin/usuarios');
     }
 
     public function suspension($user_id)
@@ -186,7 +194,7 @@ class AdminController extends Controller
                 'title' => 'Suspender usuario'
             ));
         } else {
-            Redirect::to('admin');
+            Redirect::to('admin/usuarios');
         }
     }
 
@@ -195,7 +203,7 @@ class AdminController extends Controller
             Request::post('suspension'), Request::post('user_id')
         );
 
-        Redirect::to("admin");
+        Redirect::to("admin/usuarios");
     }
 
     public function delete($user_id){
@@ -205,7 +213,7 @@ class AdminController extends Controller
                 'title' => 'Eliminar usuario'
             ));
         } else {
-            Redirect::to('admin');
+            Redirect::to('admin/usuarios');
         }
     }
 
@@ -219,6 +227,6 @@ class AdminController extends Controller
             }
         }
 
-        Redirect::to('admin');
+        Redirect::to('admin/usuarios');
     }
 }

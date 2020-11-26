@@ -2,7 +2,7 @@
     <div class="container">
         <?php $this->renderFeedbackMessages(); ?>
         <div class="d-flex p-2 justify-content-center">
-            <div class="card wetrust rounded shadow">
+            <div class="card rounded shadow">
                 <div class="card-body">
                     <h5 class="card-title text-center">Ingresar</h5>
                     <form action="<?php echo Config::get('URL'); ?>login/login" method="post">
@@ -24,7 +24,7 @@
                             <input type="hidden" name="redirect" value="<?php echo $this->encodeHTML($this->redirect); ?>" />
                         <?php } ?>
                         <input type="hidden" name="csrf_token" value="<?= Csrf::makeToken(); ?>" />
-                        <input type="submit" class="btn btn-outline-light my-4 shadow-lg mx-auto d-block" value="Ingresar"/>
+                        <input type="submit" class="btn btn-outline-light my-4 mx-auto d-block" value="Ingresar"/>
                     </form>
                     <a href="<?php echo Config::get('URL'); ?>login/requestPasswordReset">¿Olvido contraseña?</a>
                 </div>

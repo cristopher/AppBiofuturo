@@ -11,6 +11,7 @@ class DashboardController extends Controller
     public function index()
     {
         $this->View->render('dashboard/index',array(
+            'saludo' => ModuleModel::saludo(),
             'title' => 'Tablero'
         ));
     }

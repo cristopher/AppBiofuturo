@@ -37,8 +37,8 @@
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Simple | <?= $this->title; ?>">
 </head>
-<body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top sombra">
+<body class="wetrust">
+    <nav class="navbar navbar-expand-lg fixed-top">
         <a class="navbar-brand" href="<?php echo Config::get('URL'); ?>">
             <img width="120" height="30" class="d-inline-block align-center" alt="" loading="lazy" class="img-fluid" src="images/logo.svg" alt="Logo WeTrust Technology">
         </a>
@@ -48,25 +48,28 @@
         <div class="collapse navbar-collapse" id="navbarHome">
             <ul class="navbar-nav mr-auto">
                 <?php if (Session::userIsLoggedIn()) { ?>
-                    <li class="nav-item <?php if (View::checkForActiveController($filename, "dashboard")) { echo 'active'; } ?>">
-                        <a class="nav-link text-center" href="dashboard">Tablero</a>
-                    </li>
-                    <li class="nav-item <?php if (View::checkForActiveController($filename, "note")) { echo 'active'; } ?>">
-                        <a class="nav-link text-center" href="note">Mis Notas</a>
+                    <li class="nav-item">
+                        <a class="nav-link text-center <?php if (View::checkForActiveController($filename, "dashboard")) { echo 'active'; } ?>" href="dashboard">Tablero</a>
                     </li>
                     <?php if ($this->modulos) { ?>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle mb-3 mb-md-0 text-center" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Módulos</a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <?php foreach($this->modulos as $key => $value) { ?>
-                                <a class="dropdown-item text-center text-md-left" href="<?= $value->module_url; ?>"><?= $value->module_menu; ?></a>
+                                <a class="dropdown-item" href="<?= $value->module_url; ?>">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <span class="mr-lg-2"><?= $value->module_menu; ?></span>
+                                        <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><?= $value->module_icon; ?></svg>
+                                    </div>
+                                </a>
+                                <div class="dropdown-divider"></div>
                                 <?php } ?>
                             </div>
                         </li>
                     <?php } ?>
                 <?php } else { ?>
-                    <li class="nav-item <?php if (View::checkForActiveController($filename, "register/index")) { echo 'active'; } ?>">
-                        <a class="nav-link" href="register">Registrar</a>
+                    <li class="nav-item">
+                        <a class="nav-link <?php if (View::checkForActiveController($filename, "register")) { echo 'active'; } ?>" href="register">Registrar</a>
                     </li>
                 <?php } ?>
             </ul>
@@ -103,7 +106,7 @@
             <?php } else { ?>
                 <ul class="navbar-nav">
                     <li class="nav-item <?php if (View::checkForActiveController($filename, "login/index")) { echo 'active'; } ?>">
-                        <a class="btn btn-outline-danger my-2 my-sm-0" href="<?php echo Config::get('URL'); ?>login">Ingresar</a>
+                        <a class="btn my-2 my-sm-0" href="<?php echo Config::get('URL'); ?>login">Ingresar</a>
                     </li>
                 </ul>
             <?php } ?>

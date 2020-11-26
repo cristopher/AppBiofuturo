@@ -1,4 +1,4 @@
-<header class="py-4 wetrust">
+<header class="py-4">
     <div class="container">
         <h1>Simple</h1>
     </div>

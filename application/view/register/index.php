@@ -2,7 +2,7 @@
     <div class="container">
         <?php $this->renderFeedbackMessages(); ?>
         <div class="d-flex p-2 justify-content-center">
-            <div class="card wetrust rounded shadow">
+            <div class="card rounded shadow">
                 <div class="card-body">
                     <h5 class="card-title text-center">Nueva cuenta</h5>
                     <form action="<?php echo Config::get('URL'); ?>register/register_action" method="post">
@@ -36,7 +36,7 @@
                             <input class="form-control" type="text" name="captcha" required />
                             <a href="#" onclick="document.getElementById('captcha').src = '<?php echo Config::get('URL'); ?>register/showCaptcha?' + Math.random(); return false">Recargar Captcha</a>
                         </div>
-                        <input type="submit" class="btn btn-outline-light my-4 shadow-lg mx-auto d-block" value="registrar"/>
+                        <input type="submit" class="btn btn-outline-light my-4 mx-auto d-block" value="Registrar"/>
                     </form>
                 </div>
             </div>

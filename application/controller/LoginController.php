@@ -58,7 +58,7 @@ class LoginController extends Controller
     public function loginWithCookie()
     {
 
-         $login_successful = LoginModel::loginWithCookie(Request::cookie('remember_me'));
+        $login_successful = LoginModel::loginWithCookie(Request::cookie('remember_me'));
 
         if ($login_successful) {
             Redirect::to('dashboard');
@@ -77,8 +77,13 @@ class LoginController extends Controller
 
     public function requestPasswordReset_action()
     {
-        PasswordResetModel::requestPasswordReset(Request::post('user_email'), Request::post('captcha'));
-        Redirect::to('login');
+        $recover = PasswordResetModel::requestPasswordReset(Request::post('user_email'), Request::post('captcha'));
+
+        if ($recover) {
+            Redirect::to('login');
+        } else {
+            Redirect::to('login/requestPasswordReset');
+        }
     }
 
     public function verifyPasswordReset($user_id, $verification_code)
