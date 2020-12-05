@@ -29,6 +29,17 @@ class UserModel
         return $all_users_profiles;
     }
 
+    public static function getAllUsers()
+    {
+        $database = DatabaseFactory::getFactory()->getConnection();
+
+        $sql = "SELECT user_id, user_name, user_email FROM users WHERE user_active = 1 AND user_deleted = 0";
+        $query = $database->prepare($sql);
+        $query->execute();
+
+        return $query->fetchAll();
+    }
+
     public static function getPublicProfileOfUser($user_id)
     {
         $database = DatabaseFactory::getFactory()->getConnection();
