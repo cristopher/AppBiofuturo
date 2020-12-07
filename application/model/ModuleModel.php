@@ -43,7 +43,7 @@ class ModuleModel
 
         if($hora > 6 && $hora < 12){ 
             return "Buenos días, "; 
-        }elseif($hora > 12 && $hora<=19){ 
+        }else if($hora >= 12 && $hora <=19){ 
             return "Buenas Tardes, "; 
         }else{
             return "Buenas Noches, ";

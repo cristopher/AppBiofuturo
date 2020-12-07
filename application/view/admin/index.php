@@ -13,7 +13,7 @@
         <?php foreach($this->administrator as $key => $value) { ?>
             <div class="col text-center">
                 <p class="mb-0"><a href="<?= $value->admin_url; ?>" class="btn btn-large p-3 m-3"><svg width="4em" height="4em" viewBox="0 0 16 16" class="bi" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><?= $value->admin_icon; ?></svg></a></p>
-                <p><a href="<?= $value->admin_url; ?>" class="text-dark text-decoration-none text-center">
+                <p><a href="<?= $value->admin_url; ?>" class="text-center">
                     <?= $value->admin_menu; ?>
                 </a></p>
             </div>

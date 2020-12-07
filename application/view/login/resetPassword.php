@@ -16,7 +16,7 @@
                             <label>Repetir contraseña</label>
                             <input class="form-control" type="password" name="user_password_repeat" pattern=".{6,}" required />
                         </div>
-                        <input type="submit" class="btn btn-outline-light my-4 mx-auto d-block" value="Guardar"/>
+                        <button type="submit" class="btn my-4 mx-auto d-block">Guardar</button>
                     </form>
                     <a href="<?php echo Config::get('URL'); ?>login">Volver</a>
                 </div>

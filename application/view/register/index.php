@@ -31,12 +31,12 @@
                             </div>
                         </div>
                         <img class="img-fluid img-thumbnail mx-auto d-block" id="captcha" src="<?php echo Config::get('URL'); ?>register/showCaptcha" />
-                        <div class="form-group">
+                        <div class="form-group mt-2">
                             <label>Escribir captcha</label>
                             <input class="form-control" type="text" name="captcha" required />
                             <a href="#" onclick="document.getElementById('captcha').src = '<?php echo Config::get('URL'); ?>register/showCaptcha?' + Math.random(); return false">Recargar Captcha</a>
                         </div>
-                        <input type="submit" class="btn btn-outline-light my-4 mx-auto d-block" value="Registrar"/>
+                        <button type="submit" class="btn my-4 mx-auto d-block">Registrar</button>
                     </form>
                 </div>
             </div>
