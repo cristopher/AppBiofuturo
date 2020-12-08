@@ -54,6 +54,9 @@ h1, h2,h3,h4,h5,h6{
     color:  var(--light);
     border-color:  var(--light);
 }
+.wetrust .modal-content{
+    background-color:  var(--light);
+}
 .completo{
     min-height:89vh;
 }
@@ -122,5 +125,8 @@ footer a:hover{
     }
     .wetrust .table-hover tbody tr:hover{
         color:  var(--wetrust);
+    }
+    .wetrust .modal-content{
+        background-color: #2f3237 !important
     }
 }
