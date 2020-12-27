@@ -62,7 +62,7 @@
                     <td><?= $user->user_name; ?></td>
                     <td><?= $user->user_email; ?></td>
                     <td><?= ($user->user_active == 0 ? 'No' : 'Si'); ?></td>
-                    <td class="py-1">
+                    <td class="py-1 text-center">
                         <div class="btn-group dropleft" role="group">
                             <button id="<?= $user->user_name; ?>" type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-tools" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
