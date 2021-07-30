@@ -20,7 +20,7 @@ class PasswordResetModel
             return false;
         }
         $temporary_timestamp = time();
-        $user_password_reset_hash = sha1(uniqid(mt_rand(), true));
+        $user_password_reset_hash = bin2hex(random_bytes(40));
         $token_set = self::setPasswordResetDatabaseToken($result->user_id, $user_password_reset_hash, $temporary_timestamp);
         if (!$token_set) {
             return false;

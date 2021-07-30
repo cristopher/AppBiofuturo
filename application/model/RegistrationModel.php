@@ -26,7 +26,7 @@ class RegistrationModel
 
         if (!$return) return false;
 
-        $user_activation_hash = sha1(uniqid(mt_rand(), true));
+        $user_activation_hash = bin2hex(random_bytes(40));
         if (!self::writeNewUserToDatabase($user_name, $user_password_hash, $user_email, time(), $user_activation_hash)) {
             Session::add('feedback_negative', Text::get('FEEDBACK_ACCOUNT_CREATION_FAILED'));
             return false;
