@@ -4,8 +4,8 @@
         <div class="d-flex p-2 justify-content-center">
             <div class="card rounded shadow">
                 <div class="card-body">
-                    <h5 class="card-title text-center">Ingresar</h5>
-                    <form action="<?php echo Config::get('URL'); ?>login/login" method="post">
+                    <h5 class="card-title">Iniciar sesión</h5>
+                    <form action="<?= Config::get('URL'); ?>login/login" method="post">
                         <div class="form-group">
                             <label>Email</label>
                             <input class="form-control" type="email" name="user_email" required />

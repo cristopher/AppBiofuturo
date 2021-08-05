@@ -6,15 +6,15 @@
         </div>
         <div class="row">
             <div class="col-12 col-md-6">
-                <div class="d-flex flex-column flex-md-row justify-content-center align-items-center">
+                <div class="d-flex flex-row justify-content-center align-items-center">
                     <?php if (Config::get('USE_GRAVATAR')) { ?>
                         <img class="rounded-circle" src='<?= $this->user_gravatar_image_url; ?>' />
                     <?php } else { ?>
                         <img class="rounded-circle" src='<?= $this->user_avatar_file; ?>' />
                     <?php } ?>
-                    <p class="mb-0 ml-md-5 mt-3 mt-md-0 text-center text-md-left"><?= $this->user_name; ?><br><small><?= $this->user_email; ?></small></p>
+                    <p class="mb-0 ml-3 ml-md-5 mt-3 mt-md-0"><?= $this->user_name; ?><br><small><?= $this->user_email; ?></small></p>
                     <p class="d-none d-md-block border-left mx-md-5">&nbsp;<br>&nbsp;<br>&nbsp;</p>
-                    <p class="mb-0 mt-3 mt-md-0">Tipo de cuenta:<br><?= $this->user_account_type; ?></small></p>
+                    <p class="d-none d-md-block mb-0 mt-0">Tipo de cuenta:<br><?= $this->user_account_type; ?></small></p>
                 </div>
             </div>
             <div class="col-12 col-md-6">

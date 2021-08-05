@@ -10,7 +10,7 @@ class IndexController extends Controller
     public function index()
     {
         $this->View->render('index/index',array(
-            'title' => 'Inicio'
+            'title' => 'Plataforma de extranet privada'
         ));
     }
 }

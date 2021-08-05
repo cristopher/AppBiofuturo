@@ -3,7 +3,7 @@
 }
 body{
     font-family: 'Nunito', sans-serif;
-    margin-top:55px;
+    margin-top:40px;
 }
 h1, h2,h3,h4,h5,h6{
     font-weight: 300 !important;
@@ -11,6 +11,7 @@ h1, h2,h3,h4,h5,h6{
 .wetrust > nav{
     background-color: var(--light);
     box-shadow: 0 3px 5px -1px rgba(0,0,0,.2),0 6px 10px 0 rgba(0,0,0,.14),0 1px 18px 0 rgba(0,0,0,.12);
+    padding:0;
 }
 .wetrust > nav .nav-link{
     color: var(--dark)
@@ -55,15 +56,15 @@ h1, h2,h3,h4,h5,h6{
     background-color:  var(--light);
 }
 .completo{
-    min-height:89vh;
+    min-height:95vh;
 }
 .minimo{
-    min-height:79vh;
+    min-height:80vh;
 }
 footer{
     background-color: #303030;
     color: gray;
-    padding: 28px 8px;
+    padding: 0.2rem;
     display: flex;
     -webkit-box-align: center;
     align-items: center;

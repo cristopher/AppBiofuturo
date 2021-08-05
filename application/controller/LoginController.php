@@ -15,7 +15,7 @@ class LoginController extends Controller
             Redirect::home();
         } else {
             $data = array('redirect' => Request::get('redirect') ? Request::get('redirect') : null);
-            $data['title'] = 'Ingresar';
+            $data['title'] = 'Iniciar sesión en tu cuenta';
             $this->View->render('login/index', $data);
         }
     }
