@@ -8,17 +8,34 @@
 </header>
 <main class="minimo">
     <div class="container">
-    <?php if ($this->modulos) { ?>
-        <div class="row row-cols-2 row-cols-md-6 m-0 justify-content-center">
-        <?php foreach($this->modulos as $key => $value) { ?>
-            <div class="col text-center">
-                <p class="mb-0"><a href="<?= $value->module_url; ?>" class="btn btn-large p-3 m-3"><svg width="4em" height="4em" viewBox="0 0 16 16" class="bi" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><?= $value->module_icon; ?></svg></a></p>
-                <p><a href="<?= $value->module_url; ?>" class="text-dark text-decoration-none text-center">
-                    <?= $value->module_menu; ?>
-                </a></p>
+        <div class="d-none d-lg-block">
+        <?php if ($this->modulos) { ?>
+            <div class="row row-cols-2 row-cols-md-6 m-0 justify-content-center">
+            <?php foreach($this->modulos as $key => $value) { ?>
+                <div class="col text-center">
+                    <p class="mb-0"><a href="<?= $value->module_url; ?>" class="btn btn-large p-3 m-3"><svg width="4em" height="4em" viewBox="0 0 16 16" class="bi" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><?= $value->module_icon; ?></svg></a></p>
+                    <p><a href="<?= $value->module_url; ?>" class="text-dark text-decoration-none text-center">
+                        <?= $value->module_menu; ?>
+                    </a></p>
+                </div>
+            <?php } ?>
             </div>
         <?php } ?>
         </div>
-    <?php } ?>
     </div>
+<?php if ($this->modulos) { ?>
+    <div class="d-block d-lg-none">
+        <div class="d-flex flex-column border-top border-bottom">
+        <?php foreach($this->modulos as $key => $value) { ?>
+            <div>
+                <a href="<?= $value->module_url; ?>" class="d-flex flex-row pl-3">
+                    <div class="mr-3 py-3"><svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><?= $value->module_icon; ?></svg></div>
+                    <div class="border-bottom flex-grow-1 py-3"><?= $value->module_menu; ?></div>
+                    <div class="border-bottom p-3"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/></svg></div>
+                </a>    
+            </div>
+        <?php } ?>
+        </div>
+    </div>
+<?php } ?>
 </main>

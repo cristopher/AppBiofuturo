@@ -98,7 +98,7 @@
                         <?php if ($this->modulos) { ?>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle mb-3 mb-md-0 text-center" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Módulos</a>
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <div class="dropdown-menu mb-3 mb-lg-0" aria-labelledby="navbarDropdown">
                                     <?php foreach($this->modulos as $key => $value) { ?>
                                     <a class="dropdown-item" href="<?= $value->module_url; ?>">
                                         <div class="d-flex justify-content-between align-items-center">
