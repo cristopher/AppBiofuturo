@@ -1,4 +1,4 @@
-<header class="py-4">
+<header class="pb-4 sticky-top">
     <div class="container">
         <h1>Simple</h1>
     </div>

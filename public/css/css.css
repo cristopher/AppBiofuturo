@@ -3,7 +3,6 @@
 }
 body{
     font-family: 'Nunito', sans-serif;
-    margin-top:40px;
 }
 h1, h2,h3,h4,h5,h6{
     font-weight: 300 !important;
@@ -31,6 +30,7 @@ h1, h2,h3,h4,h5,h6{
 .wetrust header{
     background-color: var(--wetrust);
     color:white;
+    padding-top: 3.5rem!important
 }
 .wetrust header a{
     color:white;
@@ -56,7 +56,7 @@ h1, h2,h3,h4,h5,h6{
     background-color:  var(--light);
 }
 .completo{
-    min-height:95vh;
+    min-height:96vh;
 }
 .minimo{
     min-height:80vh;
