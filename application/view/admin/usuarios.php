@@ -16,7 +16,7 @@
                 </div>
                 <div id="collapseOne" class="collapse" aria-labelledby="headingNuevo" data-parent="#accordionNuevo">
                     <div class="card-body">
-                        <form class="row" method="post" action="<?php echo Config::get('URL');?>admin/register_action">
+                        <form class="row" method="post" action="<?= Config::get('URL');?>admin/register_action">
                             <div class="form-group col-12 col-lg-6">
                                 <label>Nombre de usuario:</label>
                                 <input type="text" class="form-control" id="user_name" name="user_name" pattern="[a-zA-ZñÑá-úÁ-Ú0-9 ]{2,64}" placeholder="Escriba un nombre" autocomplete="off" required>

@@ -19,7 +19,7 @@
             <div class="card shadow">
                 <div class="card-body">
                     <h5 class="card-title">Eliminar cuenta de usuario</h5>
-                    <form action="<?php echo Config::get('URL'); ?>admin/delete_action" method="post" enctype="multipart/form-data">
+                    <form action="<?= Config::get('URL'); ?>admin/delete_action" method="post" enctype="multipart/form-data">
                         <div class="form-group">
                             <input type="hidden" name="user_id" value="<?= $this->user->user_id; ?>" >
                             <input type="hidden" name="csrf_token" value="<?= Csrf::makeToken(); ?>" />

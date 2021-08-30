@@ -18,7 +18,7 @@
         <div class="d-flex justify-content-center">
             <div class="card shadow">
                 <div class="card-body">
-                    <form method="post" action="<?php echo Config::get('URL'); ?>admin/changePassword_action" name="new_password_form">
+                    <form method="post" action="<?= Config::get('URL'); ?>admin/changePassword_action" name="new_password_form">
                         <div class="form-group">
                             <label>Nueva clave:</label>
                             <input type="password" class="form-control" id="user_password_new" name='user_password_new' pattern=".{6,}" required autocomplete="off">

@@ -21,12 +21,12 @@
                             </label>
                         </div>
                         <?php if (!empty($this->redirect)) { ?>
-                            <input type="hidden" name="redirect" value="<?php echo $this->encodeHTML($this->redirect); ?>" />
+                            <input type="hidden" name="redirect" value="<?= $this->encodeHTML($this->redirect); ?>" />
                         <?php } ?>
                         <input type="hidden" name="csrf_token" value="<?= Csrf::makeToken(); ?>" />
                         <button type="submit" class="btn my-4 mx-auto d-block">Ingresar</button>
                     </form>
-                    <a href="<?php echo Config::get('URL'); ?>login/requestPasswordReset">¿Olvido contraseña?</a>
+                    <a href="<?= Config::get('URL'); ?>login/requestPasswordReset">¿Olvido contraseña?</a>
                 </div>
             </div>
         </div>

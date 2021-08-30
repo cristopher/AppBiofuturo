@@ -18,7 +18,7 @@
         <div class="d-flex justify-content-center">
             <div class="card shadow">
                 <div class="card-body">
-                    <form action="<?php echo Config::get('URL'); ?>admin/changeUserRole_action" method="post">
+                    <form action="<?= Config::get('URL'); ?>admin/changeUserRole_action" method="post">
                         <div class="form-group">
                             <label>Seleccionar nivel:</label>
                             <select class="form-control" name="user_account" required>

@@ -18,7 +18,7 @@
         <div class="d-flex justify-content-center">
             <div class="card shadow">
                 <div class="card-body">
-                    <form action="<?php echo Config::get('URL'); ?>admin/suspension_action" method="post">
+                    <form action="<?= Config::get('URL'); ?>admin/suspension_action" method="post">
                         <div class="form-group">
                             <label>Tiempo de suspension (Horas):</label>
                             <input type="number" class="form-control" name="suspension" required>

@@ -19,7 +19,7 @@
             <div class="card shadow">
                 <div class="card-body">
                     <h5 class="card-title">Subir nuevo avatar</h5>
-                    <form action="<?php echo Config::get('URL'); ?>admin/uploadAvatar_action" method="post" enctype="multipart/form-data">
+                    <form action="<?= Config::get('URL'); ?>admin/uploadAvatar_action" method="post" enctype="multipart/form-data">
                         <div class="form-group">
                             <label for="exampleFormControlFile1" class="mb-4">Elija una imágen jpg (Max. 5MB):</label>
                             <input type="file" class="form-control-file" name="avatar_file" required >
@@ -31,7 +31,7 @@
                     </form>
                     <hr>
                     <h5 class="card-title">Eliminar avatar</h5>
-                    <a href="<?php echo Config::get('URL'); ?>admin/deleteAvatar_action/<?= $this->user->user_id; ?>" class="btn my-4 mx-auto d-block">Eliminar actual avatar</a>
+                    <a href="<?= Config::get('URL'); ?>admin/deleteAvatar_action/<?= $this->user->user_id; ?>" class="btn my-4 mx-auto d-block">Eliminar actual avatar</a>
                 </div>
             </div>
         </div>

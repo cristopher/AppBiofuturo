@@ -12,7 +12,7 @@
         <div class="d-flex justify-content-center">
             <div class="card shadow">
                 <div class="card-body">
-                    <form action="<?php echo Config::get('URL'); ?>user/editUserEmail_action" method="post">
+                    <form action="<?= Config::get('URL'); ?>user/editUserEmail_action" method="post">
                         <div class="form-group">
                             <label for="exampleInputEmail1">Nuevo E-Mail:</label>
                             <input type="email" class="form-control" name="user_email" aria-describedby="emailHelp" placeholder="email" value="<?= $this->user_email; ?>" required>

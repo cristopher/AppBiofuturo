@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <title>Simple | <?= $this->title; ?></title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <base href="<?php echo Config::get('URL'); ?>" target="_self">
+    <base href="<?= Config::get('URL'); ?>" target="_self">
     <link rel="stylesheet" href="css/nunito.css">
     <link rel="stylesheet" href="css/bootstrap.min.css" integrity="sha384-WtHCcd/cf7tgVgrBTucEDmIODJvuLRMmErKYMf+4ufedHtePtRc1h2IPoz+O0ulr" crossorigin="anonymous">
     <link rel="stylesheet" href="css/css.css">
@@ -31,9 +31,9 @@
     <meta name="Description" content="Framework MCV de WeTrust para el desarrollo de plataformas web.">
     <meta property="og:title" content="Simple | <?= $this->title; ?>">
     <meta property="og:description" content="Framework MCV de WeTrust para el desarrollo de plataformas web.">
-    <meta property="og:url" content="<?php echo Config::get('URL'); ?>">
+    <meta property="og:url" content="<?= Config::get('URL'); ?>">
     <meta property="og:locale" content="es_CL">
-    <meta property="og:image" content="<?php echo Config::get('URL'); ?>images/graph_logo.png">
+    <meta property="og:image" content="<?= Config::get('URL'); ?>images/graph_logo.png">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Simple | <?= $this->title; ?>">
 </head>
@@ -43,15 +43,15 @@
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHome" aria-controls="navbarHome" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <a class="navbar-brand d-none d-lg-block" href="<?php echo Config::get('URL'); ?>">
+            <a class="navbar-brand d-none d-lg-block" href="<?= Config::get('URL'); ?>">
                 <img width="120" height="30" class="d-inline-block align-center" alt="" loading="lazy" class="img-fluid" src="images/logo_big.svg" alt="Logo WeTrust Technology">
             </a>
-            <a class="navbar-brand d-block d-lg-none mr-0" href="<?php echo Config::get('URL'); ?>">
+            <a class="navbar-brand d-block d-lg-none mr-0" href="<?= Config::get('URL'); ?>">
                 <img width="34" height="30" class="d-inline-block align-center" alt="" loading="lazy" class="img-fluid" src="images/logo.svg" alt="Logo WeTrust Technology">
             </a>
             <?php if (Session::userIsLoggedIn() == false) { ?>
                 <div class="nav-item d-block d-lg-none">
-                    <a class="nav-link" href="<?php echo Config::get('URL'); ?>login" title="Registrar">
+                    <a class="nav-link" href="<?= Config::get('URL'); ?>login" title="Ingresar">
                         <svg width="1.2em" height="1.2em" viewBox="0 0 16 16" class="bi bi-door-open" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd" d="M1 15.5a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 0 1h-13a.5.5 0 0 1-.5-.5zM11.5 2H11V1h.5A1.5 1.5 0 0 1 13 2.5V15h-1V2.5a.5.5 0 0 0-.5-.5z"></path>
                             <path fill-rule="evenodd" d="M10.828.122A.5.5 0 0 1 11 .5V15h-1V1.077l-6 .857V15H3V1.5a.5.5 0 0 1 .43-.495l7-1a.5.5 0 0 1 .398.117z"></path>
@@ -78,7 +78,7 @@
                         </a>
                         <div class="dropdown-divider"></div>
                         <?php if (Session::get("user_account_type") == 7) : ?>
-                        <a class="dropdown-item <?php if (View::checkForActiveController($filename, "admin")) {echo 'active';} ?>" href="admin">
+                        <a class="dropdown-item <?= (View::checkForActiveController($filename, "admin") == true) ? 'active' : ''; ?>" href="admin">
                             <div class="d-flex justify-content-between align-items-center">
                                 Admin
                                 <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-sliders" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M11.5 2a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zM9.05 3a2.5 2.5 0 0 1 4.9 0H16v1h-2.05a2.5 2.5 0 0 1-4.9 0H0V3h9.05zM4.5 7a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zM2.05 8a2.5 2.5 0 0 1 4.9 0H16v1H6.95a2.5 2.5 0 0 1-4.9 0H0V8h2.05zm9.45 4a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zm-2.45 1a2.5 2.5 0 0 1 4.9 0H16v1h-2.05a2.5 2.5 0 0 1-4.9 0H0v-1h9.05z"/></svg>
@@ -93,7 +93,7 @@
                     <div class="dropdown-divider"></div>
                     <?php if (Session::userIsLoggedIn()) { ?>
                         <li class="nav-item">
-                            <a class="nav-link text-center <?php if (View::checkForActiveController($filename, "dashboard")) { echo 'active'; } ?>" href="dashboard">Tablero</a>
+                            <a class="nav-link text-center <?= (View::checkForActiveController($filename, "dashboard") == true) ? 'active' : ''; ?>" href="dashboard">Tablero</a>
                         </li>
                         <?php if ($this->modulos) { ?>
                             <li class="nav-item dropdown">
@@ -114,7 +114,7 @@
                     <?php } else { ?>
                         <div class="dropdown-divider"></div>
                         <li class="nav-item">
-                            <a class="nav-link text-center <?php if (View::checkForActiveController($filename, "register")) { echo 'active'; } ?>" href="register">Registrar</a>
+                            <a class="nav-link text-center <?= (View::checkForActiveController($filename, "register") == true) ? 'active' : ''; ?>" href="register">Registrar</a>
                         </li>
                     <?php } ?>
                 </ul>
@@ -138,7 +138,7 @@
                                 </a>
                                 <div class="dropdown-divider"></div>
                                 <?php if (Session::get("user_account_type") == 7) : ?>
-                                    <a class="dropdown-item <?php if (View::checkForActiveController($filename, "admin")) {echo 'active';} ?>" href="admin">
+                                    <a class="dropdown-item <?= (View::checkForActiveController($filename, "admin") == true) ? 'active' : ''; ?>" href="admin">
                                         <div class="d-flex justify-content-between align-items-center">
                                             Admin
                                             <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-sliders" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M11.5 2a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zM9.05 3a2.5 2.5 0 0 1 4.9 0H16v1h-2.05a2.5 2.5 0 0 1-4.9 0H0V3h9.05zM4.5 7a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zM2.05 8a2.5 2.5 0 0 1 4.9 0H16v1H6.95a2.5 2.5 0 0 1-4.9 0H0V8h2.05zm9.45 4a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zm-2.45 1a2.5 2.5 0 0 1 4.9 0H16v1h-2.05a2.5 2.5 0 0 1-4.9 0H0v-1h9.05z"/></svg>
@@ -150,8 +150,8 @@
                     </ul>
                 <?php } else { ?>
                     <ul class="navbar-nav">
-                        <li class="nav-item d-none d-lg-block <?php if (View::checkForActiveController($filename, "login/index")) { echo 'active'; } ?>">
-                            <a class="btn my-2 my-sm-0" href="<?php echo Config::get('URL'); ?>login">Ingresar</a>
+                        <li class="nav-item d-none d-lg-block <?= (View::checkForActiveController($filename, "login/index") == true) ? 'active' : ''; ?>">
+                            <a class="btn my-2 my-sm-0" href="<?= Config::get('URL'); ?>login">Ingresar</a>
                         </li>
                     </ul>
                 <?php } ?>
