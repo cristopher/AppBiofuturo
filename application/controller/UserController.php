@@ -1,4 +1,6 @@
 <?php
+use PHPMailer\PHPMailer\PHPMailer;
+use League\OAuth2\Client\Provider\Google;
 
 class UserController extends Controller
 {
@@ -100,5 +102,63 @@ class UserController extends Controller
             Redirect::to('user');
         else
             Redirect::to('user/changePassword');
+    }
+
+    public function conectGoogle()
+    {
+        $params = [
+            'clientId' => Config::get('EMAIL_GOOGLE_CLIENT_ID'),
+            'clientSecret' => Config::get('EMAIL_GOOGLE_CLIENT_SECRET'),
+            'redirectUri' => 'https:' . Config::get('URL') . 'user/response',
+            'accessType' => 'offline'
+        ];
+
+        $provider = new Google($params);
+        $options = [
+            'scope' => [
+                'https://mail.google.com/'
+            ],
+            'prompt' => 'consent'
+        ];
+
+        $authUrl = $provider->getAuthorizationUrl($options);
+
+        $this->View->render('user/userConected',array(
+            'user_name' => Session::get('user_name'),
+            'title' => 'Cambiar nombre de usuario',
+            'conected' => UserModel::isGoogleConected(Session::get('user_id')),
+            'user_email' => Session::get('user_email'),
+            'url' => $authUrl
+        ));
+    }
+
+    public function response()
+    {
+        if($_GET['code']){
+
+            $params = [
+                'clientId' => Config::get('EMAIL_GOOGLE_CLIENT_ID'),
+                'clientSecret' => Config::get('EMAIL_GOOGLE_CLIENT_SECRET'),
+                'redirectUri' => 'https:' . Config::get('URL') . 'user/response',
+                'accessType' => 'offline'
+            ];
+
+            $provider = new Google($params);
+
+            $token = $provider->getAccessToken('authorization_code', [
+                'code' => $_GET['code']
+            ]);
+
+            UserModel::saveGoogleToken(Session::get('user_id'), $token->getRefreshToken());
+        }
+
+        Redirect::to('user/conectGoogle');
+    }
+
+    public function disconectGoogle()
+    {
+        UserModel::disconectGoogle(Session::get('user_id'));
+
+        Redirect::to('user/conectGoogle');
     }
 }

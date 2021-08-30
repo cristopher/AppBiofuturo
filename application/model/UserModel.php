@@ -297,4 +297,57 @@ class UserModel
         }
         return false;
     }
+
+    public static function isGoogleConected($user_id)
+    {
+        $database = DatabaseFactory::getFactory()->getConnection();
+
+        $query = $database->prepare("SELECT user_authorization FROM users WHERE user_id = :user_id AND user_authorization = 1 LIMIT 1");
+        $query->execute(array(':user_id' => $user_id));
+
+        if ($query->rowCount() == 1) {
+            return true;
+        }
+
+        return false;
+    }
+
+    public static function saveGoogleToken($user_id, $code)
+    {
+        $database = DatabaseFactory::getFactory()->getConnection();
+
+        $query = $database->prepare("UPDATE users SET user_authorization_code = :user_authorization_code, user_authorization = 1 WHERE user_id = :user_id LIMIT 1");
+        $query->execute(array(':user_authorization_code' => $code, ':user_id' => $user_id));
+        
+        if ($query->rowCount() == 1) {
+            return true;
+        }
+
+        return false;
+    }
+
+    public static function getGoogleToken($user_id)
+    {
+        $database = DatabaseFactory::getFactory()->getConnection();
+
+        $query = $database->prepare("SELECT user_authorization_code FROM users WHERE user_id = :user_id AND user_authorization = 1 LIMIT 1");
+        $query->execute(array(':user_id' => $user_id));
+
+        return $query->fetchColumn();
+
+    }
+
+    public static function disconectGoogle($user_id)
+    {
+        $database = DatabaseFactory::getFactory()->getConnection();
+
+        $query = $database->prepare("UPDATE users SET user_authorization_code = null, user_authorization = 0 WHERE user_id = :user_id LIMIT 1");
+        $query->execute(array(':user_id' => $user_id));
+        
+        if ($query->rowCount() == 1) {
+            return true;
+        }
+
+        return false;
+    }
 }

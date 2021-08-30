@@ -206,14 +206,15 @@ class RegistrationModel
         $body = Text::get('FEEDBACK_REGISTRATION_HELLO') . $user_name. "\n\n". Text::get('FEEDBACK_REGISTRATION_WELCOME') ."\n\n". Config::get('EMAIL_VERIFICATION_CONTENT') . Config::get('URL') . Config::get('EMAIL_VERIFICATION_URL')
                 . '/' . urlencode($user_id) . '/' . urlencode($user_activation_hash);
 
-        $mail = new Mail;
-        $mail_sent = $mail->sendMail($user_email, Config::get('EMAIL_VERIFICATION_SUBJECT'), $body);
+        $eMail = new Mail();
+        $eMail->prepare($user_email, Config::get('EMAIL_VERIFICATION_SUBJECT'), $body);
+        $mail_sent = $eMail->send();
 
         if ($mail_sent) {
             Session::add('feedback_positive', Text::get('FEEDBACK_VERIFICATION_MAIL_SENDING_SUCCESSFUL'));
             return true;
         } else {
-            Session::add('feedback_negative', Text::get('FEEDBACK_VERIFICATION_MAIL_SENDING_ERROR') . $mail->getError() );
+            Session::add('feedback_negative', Text::get('FEEDBACK_VERIFICATION_MAIL_SENDING_ERROR') . $mail->error );
             return false;
         }
     }

@@ -1,69 +1,148 @@
 <?php
+
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\OAuth;
+use League\OAuth2\Client\Provider\Google;
 
 class Mail
 {
-    private $error;
+    private $mail;
+    public $error;
+    private $html = false;
+    private $provider;
+    private $refreshToken;
+    private $userName;
 
-    public function sendMailWithPHPMailer($user_email, $from_email, $from_name, $subject, $body, $html)
+    public function __construct($system = true)
     {
-        $mail = new PHPMailer;
+
+        $this->mail = new PHPMailer;
+        $this->mail->CharSet = PHPMailer::CHARSET_UTF8;
+
+        $this->mail->IsSMTP();
+
+        $this->mail->SMTPDebug = SMTP::DEBUG_OFF;
+        $this->mail->SMTPAuth = Config::get('EMAIL_SMTP_AUTH');
+        $this->mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+
+        $this->mail->Host = Config::get('EMAIL_SMTP_HOST');
+        $this->mail->Port = Config::get('EMAIL_SMTP_PORT');
+
+        if (Config::get('EMAIL_USED_MAILER') == "phpmailer") {
+
+            $this->mail->Username = Config::get('EMAIL_SMTP_USERNAME');
+            $this->mail->Password = Config::get('EMAIL_SMTP_PASSWORD');
+
+            if ($system == true){
+                $this->mail->From = Config::get('EMAIL_FROM');
+                $this->mail->FromName = Config::get('EMAIL_FROM_NAME');
+            }else{
+                $this->mail->From = Session::get('user_email');
+                $this->mail->FromName = Session::get('user_name');
+            }
+
+        }elseif(Config::get('EMAIL_USED_MAILER') == "google"){
+
+            $this->mail->AuthType = 'XOAUTH2';
+
+            $this->provider = new Google(
+                [
+                    'clientId' => Config::get('EMAIL_GOOGLE_CLIENT_ID'),
+                    'clientSecret' => Config::get('EMAIL_GOOGLE_CLIENT_SECRET'),
+                ]
+            );
+            
+            if ($system == true){
+    
+                $this->refreshToken = Config::get('EMAIL_GOOGLE_SYSTEM_CODE');
+                $this->userName = Config::get('EMAIL_FROM');
+
+                $this->mail->setFrom($this->userName, Config::get('EMAIL_FROM_NAME'));
+    
+            }else{
+    
+                $this->refreshToken = UserModel::getGoogleToken(Session::get('user_id'));
+                $this->userName = Session::get('user_email');
+
+                $this->mail->setFrom($this->userName, Session::get('user_name'));
+
+            }
+
+            //Pass the OAuth provider instance to PHPMailer
+            $this->mail->setOAuth(
+                new OAuth(
+                    [
+                        'provider' => $this->provider,
+                        'clientId' => Config::get('EMAIL_GOOGLE_CLIENT_ID'),
+                        'clientSecret' => Config::get('EMAIL_GOOGLE_CLIENT_SECRET'),
+                        'refreshToken' => $this->refreshToken,
+                        'userName' => $this->userName,
+                    ]
+                )
+            );
+
+        }
+
+    }
+
+    public function html(){
+        $this->html = true;
+    }
+
+    public function prepare($destino, $asunto, $mensaje){
+
+        if ($this->html){
+            $this->mail->IsHTML(true);
+            $this->mail->msgHTML($mensaje);
+        }else{
+            $this->mail->Body = $mensaje;
+        }
+
+        if (is_array($destino)){
+
+            foreach ($destino as $email) {
+                $this->mail->AddAddress($email);
+            }
+
+        }else{
+            $this->mail->AddAddress($destino);
+        }
+
+
+        $this->mail->Subject = $asunto;
+    }
+
+    public function ical($archivo){
         
-        $mail->CharSet = 'UTF-8';
+        $this->mail->Ical = $archivo;
 
-        if (Config::get('EMAIL_USE_SMTP')) {
+    }
 
-            $mail->IsSMTP();
-            $mail->SMTPDebug = SMTP::DEBUG_OFF;
-            $mail->SMTPAuth = Config::get('EMAIL_SMTP_AUTH');
-            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+    public function adjuntar($file){
 
-            $mail->Host = Config::get('EMAIL_SMTP_HOST');
-            $mail->Username = Config::get('EMAIL_SMTP_USERNAME');
-            $mail->Password = Config::get('EMAIL_SMTP_PASSWORD');
-            $mail->Port = Config::get('EMAIL_SMTP_PORT');
+        $this->mail->addAttachment($file);
 
-        } else {
+    }
 
-            $mail->IsMail();
-        }
+    public function adjuntarBase64($file, $name, $type){
+        //'application/pdf'
+        //"text/calendar; charset=utf-8; method=REQUEST"
+        $this->mail->addStringAttachment($pdfString, $name, 'base64', $type);
 
-        $mail->From = $from_email;
-        $mail->FromName = $from_name;
-        $mail->AddAddress($user_email);
-        $mail->Subject = $subject;
-        $mail->Body = $body;
+    }
 
-        if ($html){
-            $mail->IsHTML(true);
-        }
+    public function send(){
 
-        $wasSendingSuccessful = $mail->Send();
+        $wasSendingSuccessful = $this->mail->Send();
 
         if ($wasSendingSuccessful) {
             return true;
 
         } else {
-            $this->error = $mail->ErrorInfo;
+            $this->error = $this->mail->ErrorInfo;
             return false;
+
         }
-    }
-
-    public function sendMail($user_email, $subject, $body, $html = false)
-    {
-        if (Config::get('EMAIL_USED_MAILER') == "phpmailer") {
-
-            return $this->sendMailWithPHPMailer(
-                $user_email, Config::get('EMAIL_FROM'), Config::get('EMAIL_FROM_NAME'), $subject, $body, $html
-            );
-        }
-
-        return false;
-    }
-
-    public function getError()
-    {
-        return $this->error;
     }
 }

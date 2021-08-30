@@ -59,15 +59,16 @@ class PasswordResetModel
         $body = Text::get('FEEDBACK_REGISTRATION_HELLO') . $user_name. "\n\n". Config::get('EMAIL_PASSWORD_RESET_CONTENT') . "\n\n".  Config::get('URL') .
                 Config::get('EMAIL_PASSWORD_RESET_URL') . '/' . urlencode($user_id) . '/' . urlencode($user_password_reset_hash);
 
-        $mail = new Mail;
-        $mail_sent = $mail->sendMail($user_email, Config::get('EMAIL_PASSWORD_RESET_SUBJECT'), $body);
+        $eMail = new Mail();
+        $eMail->prepare($user_email, Config::get('EMAIL_PASSWORD_RESET_SUBJECT'), $body);
+        $mail_sent = $eMail->send();
 
         if ($mail_sent) {
             Session::add('feedback_positive', Text::get('FEEDBACK_PASSWORD_RESET_MAIL_SENDING_SUCCESSFUL'));
             return true;
         }
 
-        Session::add('feedback_negative', Text::get('FEEDBACK_PASSWORD_RESET_MAIL_SENDING_ERROR') . $mail->getError() );
+        Session::add('feedback_negative', Text::get('FEEDBACK_PASSWORD_RESET_MAIL_SENDING_ERROR') . $mail->error );
         return false;
     }
 

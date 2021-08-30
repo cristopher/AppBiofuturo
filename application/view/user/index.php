@@ -49,6 +49,12 @@
                 Modificar<br>contraseña
             </a>
         </div>
+        <div class="d-flex flex-column justify-content-center mx-sm-1 mb-3 mb-md-0">
+            <a href="user/conectGoogle" class="btn btn-large p-lg-3 m-lg-3"><svg width="4em" height="4em" viewBox="0 0 488 512" fill="currentColor" xmlns="http://www.w3.org/2000/svg" ><path fill="currentColor" d="M488 261.8C488 403.3 391.1 504 248 504 110.8 504 0 393.2 0 256S110.8 8 248 8c66.8 0 123 24.5 166.3 64.9l-67.5 64.9C258.5 52.6 94.3 116.6 94.3 256c0 86.5 69.1 156.6 153.7 156.6 98.2 0 135-70.4 140.8-106.9H248v-85.3h236.1c2.3 12.7 3.9 24.9 3.9 41.4z"></path></svg></a>
+            <a href="user/conectGoogle" class="text-center">
+                Conectar<br>Google
+            </a>
+        </div>
     </div>
     <div class="d-flex d-lg-none flex-column border-top border-bottom">
         <div>
@@ -76,6 +82,13 @@
             <a href="user/changePassword" class="d-flex flex-row pl-3">
                 <div class="mr-3 py-3"><svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M0 8a4 4 0 0 1 7.465-2H14a.5.5 0 0 1 .354.146l1.5 1.5a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0L13 9.207l-.646.647a.5.5 0 0 1-.708 0L11 9.207l-.646.647a.5.5 0 0 1-.708 0L9 9.207l-.646.647A.5.5 0 0 1 8 10h-.535A4 4 0 0 1 0 8zm4-3a3 3 0 1 0 2.712 4.285A.5.5 0 0 1 7.163 9h.63l.853-.854a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .708 0l.646.647.793-.793-1-1h-6.63a.5.5 0 0 1-.451-.285A3 3 0 0 0 4 5z"/><path d="M4 8a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/></svg></div>
                 <div class="border-bottom flex-grow-1 py-3">Modificar contraseña</div>
+                <div class="border-bottom p-3"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/></svg></div>
+            </a>    
+        </div>
+        <div>
+            <a href="user/conectGoogle" class="d-flex flex-row pl-3">
+                <div class="mr-3 py-3"><svg width="1.5em" height="1.5em" viewBox="0 0 488 512" fill="currentColor" xmlns="http://www.w3.org/2000/svg" ><path fill="currentColor" d="M488 261.8C488 403.3 391.1 504 248 504 110.8 504 0 393.2 0 256S110.8 8 248 8c66.8 0 123 24.5 166.3 64.9l-67.5 64.9C258.5 52.6 94.3 116.6 94.3 256c0 86.5 69.1 156.6 153.7 156.6 98.2 0 135-70.4 140.8-106.9H248v-85.3h236.1c2.3 12.7 3.9 24.9 3.9 41.4z"></path></svg></div>
+                <div class="border-bottom flex-grow-1 py-3">Conectar Google</div>
                 <div class="border-bottom p-3"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/></svg></div>
             </a>    
         </div>
