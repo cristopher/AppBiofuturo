@@ -128,7 +128,7 @@ class Mail
     public function adjuntarBase64($file, $name, $type){
         //'application/pdf'
         //"text/calendar; charset=utf-8; method=REQUEST"
-        $this->mail->addStringAttachment($pdfString, $name, 'base64', $type);
+        $this->mail->addStringAttachment($file, $name, 'base64', $type);
 
     }
 
