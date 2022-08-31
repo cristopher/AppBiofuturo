@@ -14,7 +14,7 @@ services:
   web:
     build:
         context: .
-        dockerfile: web.dockerfile
+        dockerfile: web_mysql.dockerfile
     image: web:latest
     volumes:
       - .:/opt/app

@@ -17,12 +17,27 @@ class DatabaseFactory
         if (!$this->database) {
 
             try {
-                $options = array(PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_OBJ, PDO::ATTR_ERRMODE => PDO::ERRMODE_WARNING);
-                $this->database = new PDO(
-                   Config::get('DB_TYPE') . ':host=' . Config::get('DB_HOST') . ';dbname=' .
-                   Config::get('DB_NAME') . ';port=' . Config::get('DB_PORT') . ';charset=' . Config::get('DB_CHARSET'),
-                   Config::get('DB_USER'), Config::get('DB_PASS'), $options
-                   );
+
+                if(Config::get('DB_TYPE') == 'sqlsrv'){
+
+                    $options = array(PDO::ATTR_ERRMODE => PDO::ERRMODE_WARNING);
+                    $this->database = new PDO(
+                       Config::get('DB_TYPE'). ':Server=' . Config::get('DB_HOST') . ',' . Config::get('DB_PORT') .
+                       ';Database='.Config::get('DB_NAME') . ';TrustServerCertificate=' .Config::get('TrustServerCertificate'),
+                       Config::get('DB_USER'), Config::get('DB_PASS'), $options
+                       );
+
+                }else if(Config::get('DB_TYPE') == 'mysql'){
+
+                    $options = array(PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_OBJ, PDO::ATTR_ERRMODE => PDO::ERRMODE_WARNING);
+                    $this->database = new PDO(
+                       Config::get('DB_TYPE') . ':host=' . Config::get('DB_HOST') . ';dbname=' .
+                       Config::get('DB_NAME') . ';port=' . Config::get('DB_PORT') . ';charset=' . Config::get('DB_CHARSET'),
+                       Config::get('DB_USER'), Config::get('DB_PASS'), $options
+                       );
+
+                }
+
             } catch (PDOException $e) {
 
                 echo 'Database connection can not be estabilished. Please try again later.' . '<br>';

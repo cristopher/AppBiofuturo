@@ -58,7 +58,6 @@ vi config.development.php
 config.development.php
 ```
 'EMAIL_USED_MAILER' => 'phpmailer',
-'EMAIL_USE_SMTP' => true,
 'EMAIL_SMTP_HOST' => '',
 'EMAIL_SMTP_AUTH' => true,
 'EMAIL_SMTP_USERNAME' => '',
