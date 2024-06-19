@@ -127,6 +127,12 @@ footer a:hover{
     .wetrust .card{
         background-color: #2f3237 !important
     }
+    .wetrust .list-group-item{
+        background-color: #2f3237 !important  
+    }
+    .wetrust .form-control-plaintext{
+        color:white;
+    }
     .wetrust .img-thumbnail{
         background-color: #1e2227 !important;   
     }
