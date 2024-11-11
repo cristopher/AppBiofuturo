@@ -24,6 +24,21 @@ class TecnicoModel
         return $query->fetch();
     }
 
+    public static function getTecnicoLogin($tecnico_usuario, $tecnico_password)
+    {
+        $database = DatabaseFactory::getFactory()->getConnection();
+
+        $sql = "SELECT Count(tecnico_id) FROM tecnicos WHERE tecnico_usuario = :tecnico_usuario AND tecnico_password = :tecnico_password LIMIT 1";
+        $query = $database->prepare($sql);
+        $query->execute(array(':tecnico_usuario' => $tecnico_usuario, ':tecnico_password' => $tecnico_password));
+
+        if ($query->rowCount() == 1) {
+            return true;
+        }
+
+        return false;
+    }
+
     public static function createTecnico($tecnico_nombre)
     {
         if (!$tecnico_nombre || strlen($tecnico_nombre) == 0) {
