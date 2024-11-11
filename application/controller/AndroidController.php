@@ -12,7 +12,7 @@ class AndroidController extends Controller
         $response = new stdClass();
         $response->resultado = false;
 
-        $response->resultado = TecnicosModel::getTecnicoLogin(Request::post('nombre'), Request::post('pass'));
+        $response->resultado = TecnicoModel::getTecnicoLogin(Request::post('nombre'), Request::post('pass'));
 
         header('Access-Control-Allow-Origin: *');
 
