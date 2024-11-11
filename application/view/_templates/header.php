@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="utf-8">
-    <title>Simple | <?= $this->title; ?></title>
+    <title>App Terreno | <?= $this->title; ?></title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <base href="<?= Config::get('URL'); ?>" target="_self">
     <link rel="stylesheet" href="css/nunito.css">
@@ -29,13 +29,13 @@
     <meta name="msapplication-TileImage" content="images/ms-icon-144x144.png">
     <meta name="theme-color" content="#b71923">
     <meta name="Description" content="Framework MCV de WeTrust para el desarrollo de plataformas web.">
-    <meta property="og:title" content="Simple | <?= $this->title; ?>">
+    <meta property="og:title" content="App Terreno | <?= $this->title; ?>">
     <meta property="og:description" content="Framework MCV de WeTrust para el desarrollo de plataformas web.">
     <meta property="og:url" content="<?= Config::get('URL'); ?>">
     <meta property="og:locale" content="es_CL">
     <meta property="og:image" content="<?= Config::get('URL'); ?>images/graph_logo.png">
     <meta property="og:type" content="website">
-    <meta property="og:site_name" content="Simple | <?= $this->title; ?>">
+    <meta property="og:site_name" content="App Terreno  | <?= $this->title; ?>">
 </head>
 <body class="wetrust">
     <nav class="navbar navbar-expand-lg fixed-top">
@@ -44,10 +44,10 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <a class="navbar-brand d-none d-lg-block" href="<?= Config::get('URL'); ?>">
-                <img width="120" height="30" class="d-inline-block align-center" alt="" loading="lazy" class="img-fluid" src="images/logo_big.svg" alt="Logo WeTrust Technology">
+                <img width="95" height="30" class="d-inline-block align-center" alt="" loading="lazy" class="img-fluid" src="images/logo.png" alt="Logo Biofuturo">
             </a>
             <a class="navbar-brand d-block d-lg-none mr-0" href="<?= Config::get('URL'); ?>">
-                <img width="34" height="30" class="d-inline-block align-center" alt="" loading="lazy" class="img-fluid" src="images/logo.svg" alt="Logo WeTrust Technology">
+                <img width="95" height="30" class="d-inline-block align-center" alt="" loading="lazy" class="img-fluid" src="images/logo.png" alt="Logo Biofuturo">
             </a>
             <?php if (Session::userIsLoggedIn() == false) { ?>
                 <div class="nav-item d-block d-lg-none">

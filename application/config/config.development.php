@@ -9,7 +9,7 @@ return array(
     'PATH_VIEW' => realpath(dirname(__FILE__).'/../../') . '/application/view/',
     'PATH_AVATARS' => realpath(dirname(__FILE__).'/../../') . '/public/avatars/',
     'PATH_AVATARS_PUBLIC' => 'avatars/',
-    'DEFAULT_CONTROLLER' => 'index',
+    'DEFAULT_CONTROLLER' => 'dashboard',
     'DEFAULT_ACTION' => 'index',
 
     'DB_TYPE' => 'sqlsrv',
