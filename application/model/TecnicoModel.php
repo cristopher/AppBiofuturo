@@ -28,7 +28,7 @@ class TecnicoModel
     {
         $database = DatabaseFactory::getFactory()->getConnection();
 
-        $sql = "SELECT Count(tecnico_id) FROM tecnicos WHERE tecnico_usuario = :tecnico_usuario AND tecnico_password = :tecnico_password LIMIT 1";
+        $sql = "SELECT tecnico_id FROM tecnicos WHERE tecnico_usuario = :tecnico_usuario AND tecnico_password = :tecnico_password LIMIT 1";
         $query = $database->prepare($sql);
         $query->execute(array(':tecnico_usuario' => $tecnico_usuario, ':tecnico_password' => $tecnico_password));
 
